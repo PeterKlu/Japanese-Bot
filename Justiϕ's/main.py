@@ -68,13 +68,10 @@ async def on_message(message):
             client.choice = 0
             msg = '`Initializing カタカナ quiz with English Input,` {0.author.mention}'.format(message)
             await client.send_message(message.channel, msg)
-            msg = '`Type ' + str(BOT_PREFIX) + 'reset to reset me`'.format(message)
-            await client.send_message(message.channel, msg)
-            msg = '`Type ' + str(BOT_PREFIX) + 'chart to see a chart of kana`'.format(message)
-            await client.send_message(message.channel, msg)
-            msg = '`Type in the English pronunciation of the Katakana below`'.format(message)
-            await client.send_message(message.channel, msg)
-            msg = '`----------------------------------------------------------`'.format(message)
+            msg = ''.join('`Type' + BOT_PREFIX + 'reset to reset me. If I get stuck reset me.`\n'
+                '`Type ' + BOT_PREFIX + 'chart to see a chart of kana`\n'
+                '`Type in the English pronunciation of the Katakana below`\n'
+                '`----------------------------------------------------------`')
             await client.send_message(message.channel, msg)
             client.kana_selection = katakana_list[random.randint(0, client.list_length)]
             msg = '`' + client.kana_selection + '`'.format(message)
@@ -83,13 +80,10 @@ async def on_message(message):
             client.choice = 1
             msg = '`Initializing カタカナ quiz with ひらがな Input,` {0.author.mention}'.format(message)
             await client.send_message(message.channel, msg)
-            msg = '`Type ' + str(BOT_PREFIX) + 'reset to reset me`'.format(message)
-            await client.send_message(message.channel, msg)
-            msg = '`Type ' + str(BOT_PREFIX) + 'chart to see a chart of kana`'.format(message)
-            await client.send_message(message.channel, msg)
-            msg = '`Type in the Hiragana equivalent of the Katakana below`'.format(message)
-            await client.send_message(message.channel, msg)
-            msg = '`----------------------------------------------------------`'.format(message)
+            msg = ''.join('`Type' + BOT_PREFIX + 'reset to reset me. If I get stuck reset me.`\n'
+                '`Type ' + BOT_PREFIX + 'chart to see a chart of kana`\n'
+                '`Type in the Hiragana equivalent of the Katakana below`\n'
+                '`----------------------------------------------------------`')
             await client.send_message(message.channel, msg)
             client.kana_selection = katakana_list[random.randint(0, client.list_length)]
             msg = '`' + client.kana_selection + '`'.format(message)
@@ -114,49 +108,45 @@ async def on_message(message):
             await client.send_message(message.channel, msg)
             return
 
-    if message.content.startswith(BOT_PREFIX) and client.choice < 0:
+    if message.content.startswith(BOT_PREFIX):
         client.test_taker = message.author
         message.content = message.content.lower()
-        if message.content == (BOT_PREFIX + 'katakana'):
-            msg = '''`Hiragana or English input?
-    0) English
-    1) Hiragana`'''.format(message)
+        if client.choice < 0:
+            if message.content.count('katakana') == 1:
+                msg = ''.join('`Hiragana or English input?\n'
+                    '0) English\n'
+                    '1) Hiragana`')
+                await client.send_message(message.channel, msg)
+                client.katakana_order = True
+            if message.content.count('hiragana') == 1:
+                client.choice = 2
+                msg = 'Initializing ひらがな quiz, {0.author.mention}'.format(message)
+                await client.send_message(message.channel, msg)
+                msg = ''.join('`Type' + BOT_PREFIX + 'reset to reset me. If I get stuck reset me.`\n'
+                '`Type ' + BOT_PREFIX + 'chart to see a chart of kana`\n'
+                '`Type in the English pronunciation of the Hiragana below`\n'
+                '`----------------------------------------------------------`')
+                await client.send_message(message.channel, msg)
+                client.kana_selection = hiragana_list[random.randint(0, client.list_length)]
+                msg = '`' + client.kana_selection + '`'.format(message)
+                await client.send_message(message.channel, msg)
+        if message.content.count('chart') == 1:
+            msg = ''.join('`Hiragana or Katakana Chart?\n'
+                '0) Hiragana\n'
+                '1) Katakana`')
             await client.send_message(message.channel, msg)
-            client.katakana_order = True
-        if message.content == (BOT_PREFIX + 'hiragana'):
-            client.choice = 2
-            msg = 'Initializing ひらがな quiz, {0.author.mention}'.format(message)
+            client.chart = True
+        if message.content.count('reset') == 1:
+            msg = '`Resetting`'
             await client.send_message(message.channel, msg)
-            msg = '`Type ' + str(BOT_PREFIX) + 'reset to reset me`'.format(message)
-            await client.send_message(message.channel, msg)
-            msg = '`Type ' + str(BOT_PREFIX) + 'chart to see a chart of kana`'.format(message)
-            await client.send_message(message.channel, msg)
-            msg = '`Type in the English pronunciation of the Hiragana below`'.format(message)
-            await client.send_message(message.channel, msg)
-            msg = '`----------------------------------------------------------`'.format(message)
-            await client.send_message(message.channel, msg)
-            client.kana_selection = hiragana_list[random.randint(0, client.list_length)]
-            msg = '`' + client.kana_selection + '`'.format(message)
-            await client.send_message(message.channel, msg)
-
-    if message.content == (BOT_PREFIX + 'chart'):
-        msg = '''`Hiragana or Katakana Chart?
-    0) Hiragana
-    1) Katakana`'''.format(message)
-        await client.send_message(message.channel, msg)
-        client.chart = True
-
-    if message.content == (BOT_PREFIX + 'reset'):
-        msg = '`Resetting`'
-        await client.send_message(message.channel, msg)
-        client.test_taker = client.user
-        client.katakana_order = False
-        client.mistakes = 0
-        client.kana_selection = '0'
-        client.choice = -1
-        client.first_run = True
-        completed_list = []
-        client.kamoshiranai = False
+            client.test_taker = client.user
+            client.katakana_order = False
+            client.mistakes = 0
+            client.kana_selection = '0'
+            client.choice = -1
+            client.first_run = True
+            completed_list = []
+            client.kamoshiranai = False
 
     if client.chart is True:
         if message.content == '0':
@@ -181,15 +171,14 @@ async def on_message(message):
                 if client.kana_selection == katakana_list[x]:
                     compare_num = x
 
-            if str(message.content) in en_katakana_list[compare_num]:
+            if str(message.content) in en_katakana_list[compare_num] and len(completed_list) < client.list_length + 1:
                 completed_list.append(client.kana_selection)
                 msg = ':o:`Correct!`'.format(message)
                 await client.send_message(message.channel, msg)
             if str(message.content) not in en_katakana_list[compare_num] and client.first_run is False:
                 client.mistakes = client.mistakes + 1
-                msg = ':x:`Wrong. The correct answer is "' + en_katakana_list[compare_num] + '"`'.format(message)
-                await client.send_message(message.channel, msg)
-                msg = '`A new kana is below: `'.format(message)
+                msg = ''.join(':x:`Wrong. The correct answer is "' + en_katakana_list[compare_num] + '"`\n'
+                    '`A new kana is below: `').format(message)
                 await client.send_message(message.channel, msg)
                 client.kana_selection = katakana_list[random.randint(0, client.list_length)]
 
@@ -209,15 +198,14 @@ async def on_message(message):
                 if client.kana_selection == katakana_list[x]:
                     compare_num = x
 
-            if str(message.content) in hiragana_list[compare_num]:
+            if str(message.content) in hiragana_list[compare_num] and len(completed_list) < client.list_length + 1:
                 completed_list.append(client.kana_selection)
                 msg = ':o:`せいかいだ.`'.format(message)
                 await client.send_message(message.channel, msg)
             if str(message.content) not in hiragana_list[compare_num] and client.first_run is False:
                 client.mistakes = client.mistakes + 1
-                msg = ':x:`ちがう. せいかいのこたえは「' + hiragana_list[compare_num] + '」.`'.format(message)
-                await client.send_message(message.channel, msg)
-                msg = '`あらたなカタカナはした：`'.format(message)
+                msg = ''.join(':x:`ちがう. せいかいのこたえは「' + hiragana_list[compare_num] + '」.`\n'
+                    '`あらたなカタカナはした：`').format(message)
                 await client.send_message(message.channel, msg)
                 client.kana_selection = katakana_list[random.randint(0, client.list_length)]
 
@@ -237,15 +225,14 @@ async def on_message(message):
                 if client.kana_selection == hiragana_list[x]:
                     compare_num = x
 
-            if str(message.content) in en_katakana_list[compare_num]:
+            if str(message.content) in en_katakana_list[compare_num] and len(completed_list) < client.list_length + 1:
                 completed_list.append(client.kana_selection)
                 msg = ':o:`Correct!`'.format(message)
                 await client.send_message(message.channel, msg)
             if str(message.content) not in en_katakana_list[compare_num] and client.first_run is False:
                 client.mistakes = client.mistakes + 1
-                msg = ':x:`Wrong. The correct answer is "' + en_katakana_list[compare_num] + '"`'.format(message)
-                await client.send_message(message.channel, msg)
-                msg = '`A new kana is below: `'.format(message)
+                msg = ''.join(':x:`Wrong. The correct answer is "' + en_katakana_list[compare_num] + '"`\n'
+                    '`A new kana is below: `').format(message)
                 await client.send_message(message.channel, msg)
                 client.kana_selection = hiragana_list[random.randint(0, client.list_length)]
 
