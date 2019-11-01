@@ -11,7 +11,7 @@ from discord.voice_client import VoiceClient
 from discord.ext.commands import Bot
 from random import shuffle
 
-TOKEN = 'NjM4MDgzMDUzODY4MTU0ODg0.XbXjbA.Vp8w_qd-4L5FulQsXdMVltpG02A'
+TOKEN = 'TOKEN'
 BOT_PREFIX = '!'
 
 client = Bot(command_prefix=BOT_PREFIX)  # discord.Client()
