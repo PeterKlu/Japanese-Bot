@@ -1,0 +1,54 @@
+Kun Reading: `ひと`
+On Reading: `いち`
+Represents the number 1 as `いち`, and one thing as `ひとつ`.
+Kun Reading: `ふた`
+On Reading: `に`
+Represents the number 2 as `に`, and two things as `ふたつ`. Looks like the katakana `ニ`.
+Kun Reading: `み、みっ`
+On Reading:` さん`
+Represents the number 3 as `さん`, and three things as `みつ`. Conjugates irregularly with certain counters: i.e. `三千` (3000) is `さんぜん`, not `さんせん`.
+Kun Reading: `よ、よっ、よん`
+On Reading: `し`
+Represents the number 4 as `よん` or `し`, and four things as `よっつ`.
+Kun Reading: `いつ`
+On Reading: `ご`
+Represents the number 5 as `ご`, and five things as `いつつ`.
+Kun Reading: `む、むっ、むい`
+On Reading: `ろく`
+Represents the number 6 as `ろく`, and six things as `むっつ`. Conjugates irregularly with certain counters: i.e. `六百円` is `ろっぴゃくえん`, not `ろくひゃくえん`.
+Kun Reading: `なな、なの`
+On Reading: `しち`
+Represents the number 7 as `なな` or `しち`, and seven things as `ななつ`.
+Kun Reading: `や、やっ、よう`
+On Reading: `はち`
+Represents the number 8 as `はち`, and eight things as `やっつ`. Conjugates irregularly with certain counters: i.e. `八分` is `はっぷん`, not `はちふん`.
+Kun Reading: `ここの`
+On Reading: `きゅう、く`
+Represents the number 9 as `きゅう` or `く`, and nine things as `ここのつ`. Note: `九時` is `くじ`, not `きゅうじ`.
+Kun Reading: `とお、と`
+On Reading: `じゅう、じゅ、じゅっ`
+Represents the number 10 as `じゅう`, and ten things as `とお`.
+Kun Reading: `ひ、～び、～か`
+On Reading: `にち、じつ`
+While `日本（にほん）`means Japan, `本日（ほんじつ）` is a form of the word "today" often only seen in writing. More examples: `誕生日(たんじょうび)` means "birthday", `何日ですか(なんにちですか)` means "What day is it?" 
+Kun Reading: `とし`
+On Reading: `ねん`
+`年` is the kanji for year. By itself or in `今年（ことし）`it is read as `とし`, but is otherwise typically read as `ねん`.
+Kun Reading: `つき`
+On Reading: `げつ、がつ`
+`月` is the kanji for moon`(つき)` and month`(つき/がつ/げつ)`.
+Kun Reading: `おお`
+On Reading: `だい、たい`
+Represents the concept of big or great. Examples: `大きい (おおきい)` is the word for big. `大好きな (だいすきな)` is typically used as the word for love, but literally translates to "big like".
+Kun Reading: `ちい、こ～、お～、さ～`
+On Reading: `しょう`
+Represents the concept of smallness. Examples: `小さい (ちいさい)` is the word for small. `小学校 (しょうがっこう）`means "elementary school".
+Kun Reading: `すく、すこ`
+On Reading: `しょう`
+Represents the concept of smallness. Examples: `少し(すこし)` is one way to say "a little", `少ない(すくない)` means "a few", `少年(しょうねん)` means "young boy".
+Kun Reading: `なか、うち`
+On Reading: `ちゅう、じゅう`
+Represents inside, among, middle, and during. Examples: `家の中(いえのなか)` means "inside the house", `世界中(せかいじゅう)` means "throughout the world", 中国人(ちゅうごくじん) means "Chinese person" (with the literal translation of China, 中国, being "middle country")
+Kun Reading: `この、す`
+On Reading: `こう`
+Represents the concept of fondness. Examples: `お茶が好きだ(おちゃがすきだ)` means "I like tea", `好む(このむ)` is a verb that shows preference - as in `お茶よりコーヒーが好む(おちゃよりピこうひいがこのむ)` which means I prefer tea over coffee.
