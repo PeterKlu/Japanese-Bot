@@ -48,7 +48,7 @@ On Reading: `しょう`
 Represents the concept of smallness. Examples: `少し(すこし)` is one way to say "a little", `少ない(すくない)` means "a few", `少年(しょうねん)` means "young boy".
 Kun Reading: `なか、うち`
 On Reading: `ちゅう、じゅう`
-Represents inside, among, middle, and during. Examples: `家の中(いえのなか)` means "inside the house", `世界中(せかいじゅう)` means "throughout the world", 中国人(ちゅうごくじん) means "Chinese person" (with the literal translation of China, 中国, being "middle country")
+Represents inside, among, middle, and during. Examples: `家の中(いえのなか)` means "inside the house", `世界中(せかいじゅう)` means "throughout the world", `中国人(ちゅうごくじん)` means "Chinese person" (with the literal translation of China, `中国`, being "middle country")
 Kun Reading: `この、す`
 On Reading: `こう`
 Represents the concept of fondness. Examples: `お茶が好きだ(おちゃがすきだ)` means "I like tea", `好む(このむ)` is a verb that shows preference - as in `お茶よりコーヒーが好む(おちゃよりピこうひいがこのむ)` which means I prefer tea over coffee.
