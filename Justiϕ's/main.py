@@ -11,7 +11,7 @@ from discord.voice_client import VoiceClient
 from discord.ext.commands import Bot
 from random import shuffle
 
-TOKEN = 'NjM4MDgzMDUzODY4MTU0ODg0.XbXjbA.Vp8w_qd-4L5FulQsXdMVltpG02A'
+TOKEN = 'TOKEN'
 BOT_PREFIX = '!'
 
 client = Bot(command_prefix=BOT_PREFIX)  # discord.Client()
@@ -51,7 +51,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await client.change_presence(game=discord.Game(name='!katakana, !hiragana, and !kanji', type=1))
+    await client.change_presence(game=discord.Game(name='!commands', type=1))
 
 
 @client.event
@@ -138,6 +138,11 @@ async def on_message(message):
                 client.kana_selection = hiragana_list[random.randint(0, client.list_length)]
                 msg = '`' + client.kana_selection + '`'.format(message)
                 await client.send_message(message.channel, msg)
+        if message.content.count('commands') == 1:
+            msg = ''.join('`!katakana - Initiates a quiz on Katakana\n!hiragana - Initiates a quiz on Hirgana\n'
+                          '!chart - Uploads a chart of Katakana or Hiragana\n!kanji - A random Kanji appears\n'
+                          '!op - Listen to my OP\n!reset - Resets me if a quiz is in progress`').format(message)
+            await client.send_message(message.channel, msg)
         if message.content.count('chart') == 1:
             msg = ''.join('`Hiragana or Katakana Chart?\n'
                           '0) Hiragana\n'
@@ -156,7 +161,11 @@ async def on_message(message):
             await client.send_message(message.channel, msg)
 
             kanji_info_list_level_one.close()
-
+        if message.content.count('op') == 1:
+            msg = '`Here is a link to my OP:` https://www.youtube.com/watch?v=7g0OwAqv0kQ'
+            await client.send_message(message.channel, msg)
+            msg = '`Although, Kabuto had better opening in my opinion:` https://www.youtube.com/watch?v=GmxMS5zg97M'
+            await client.send_message(message.channel, msg)
         if message.content.count('reset') == 1:
             msg = '`Resetting`'
             await client.send_message(message.channel, msg)
