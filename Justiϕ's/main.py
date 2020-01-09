@@ -12,7 +12,7 @@ from discord.ext.commands import Bot
 from random import shuffle
 
 TOKEN = 'TOKEN'
-BOT_PREFIX = '!'
+BOT_PREFIX = '!J'
 
 client = Bot(command_prefix=BOT_PREFIX)  # discord.Client()
 
@@ -21,7 +21,7 @@ client.kana_selection = '0'  # Stores the kana used for the question
 client.choice = -1  # Keeps track of whether hiragana or english input is being taken
 client.katakana_order = False  # Makes it so if someone types 0 or 1 it doesn't automatically start a katakana quiz
 client.test_taker = client.user  # So the bot only takes responses from one person
-client.kamoshiranai = False  # used to see if the message is at least contained within a list
+client.kamoshirenai = False  # used to see if the message is at least contained within a list
 client.chart = False  # To check if a chart will be uploaded
 client.first_run = True  # To check if it's the first run of a quiz
 katakana_list = ['ア', 'イ', 'ウ', 'エ', 'オ', 'カ', 'キ', 'ク', 'ケ', 'コ', 'サ', 'シ', 'ス', 'セ', 'ソ', 'タ', 'チ',
@@ -34,13 +34,13 @@ en_katakana_list = ['a', 'i', 'u', 'e', 'o', 'ka', 'ki', 'ku', 'ke', 'ko', 'sa',
                     'tsu', 'te', 'to', 'na', 'ni', 'nu', 'ne', 'no', 'ha', 'hi', 'fu', 'he', 'ho', 'ma', 'mi', 'mu',
                     'me', 'mo', 'ya', 'yu', 'yo', 'ra', 'ri', 'ru', 're', 'ro', 'wa', 'wo', 'n']
 kanji_list_level_one = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '日', '年', '月', '大', '小', '少',
-                        '中', '好']
-''''女', '男', '子', '気', '人', '私', '食', '飲', '読', '言', '語', '話', '花', '本',
+                        '中', '好', '女', '男', '子']
+''''気', '人', '私', '食', '飲', '読', '言', '語', '話', '花', '本',
                         '水', '木', '火', '金', '土', '出', '見', '行', '来', '毎', '会', '生', '手', '学', '国', '立',
                         '田', '家', '口', '長', '時', '間', '次', '近', '聞', '西', '北', '南', '東', '上', '下', '右',
                         '左', '所', '広', '古', '川', '山', '空', '風', '円', '目', '耳', '足', '百', '千', '先', '作',
                         '前', '明', '分', '文', '字', '名', '校', '早', '車', '町', '犬', '猫', '死', '外', '力', '玉',
-                        '赤', '青', '白', '天', '店', '屋', '部', '雨', '電', '活', '音', '楽', '方'] '''
+                        '赤', '青', '白', '天', '店', '屋', '部', '雨', '電', '活', '音', '楽', '方'] '''  # more kanji to be added
 completed_list = []
 client.list_length = len(katakana_list) - 1  # To store the length of the kana list
 client.kanji_one_list_length = len(kanji_list_level_one) - 1  # To store the length of the first kanji list
@@ -51,7 +51,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await client.change_presence(game=discord.Game(name='!commands', type=1))
+    await client.change_presence(game=discord.Game(name=BOT_PREFIX + 'commands', type=1))
 
 
 @client.event
@@ -62,7 +62,7 @@ async def on_message(message):
     if message.author == client.user:  # so the bot does not reply to itself
         return
 
-    '''msg = 'client.kamoshiranai: ' + str(client.kamoshiranai)    # Used for debugging
+    '''msg = 'client.kamoshirenai: ' + str(client.kamoshirenai)    # Used for debugging
     await client.send_message(message.channel, msg)
     msg = 'client.choice: ' + str(client.choice)
     await client.send_message(message.channel, msg)
@@ -104,12 +104,12 @@ async def on_message(message):
         if client.choice == 0 or client.choice == 2:
             for x in range(0, client.list_length):
                 if message.content in en_katakana_list[x]:
-                    client.kamoshiranai = True
+                    client.kamoshirenai = True
         if client.choice == 1:
             for x in range(0, client.list_length):
                 if message.content in hiragana_list[x]:
-                    client.kamoshiranai = True
-        if client.kamoshiranai is False and client.first_run is False:
+                    client.kamoshirenai = True
+        if client.kamoshirenai is False and client.first_run is False:
             msg = 'Answer not accepted, try again'.format(message)
             await client.send_message(message.channel, msg)
             msg = '`' + client.kana_selection + '`'.format(message)
@@ -176,19 +176,19 @@ async def on_message(message):
             client.choice = -1
             client.first_run = True
             completed_list = []
-            client.kamoshiranai = False
+            client.kamoshirenai = False
 
     if client.chart is True:
         if message.content == '0':
-            msg = 'https://files.tofugu.com/articles/japanese/2016-04-05-hiragana-chart/hiragana-chart.jpg'
+            msg = 'https://www.jpdrills.com/img/hiragana.jpg'
             await client.send_message(message.channel, msg)
             client.chart = False
         if message.content == '1':
-            msg = 'https://files.tofugu.com/articles/japanese/2017-07-13-katakana-chart/tofugu-katakana-chart-download.jpg'
+            msg = 'https://www.jpdrills.com/img/katagana.jpg'
             await client.send_message(message.channel, msg)
             client.chart = False
 
-    if client.kamoshiranai is True and message.author == client.test_taker and message.content.find(BOT_PREFIX) < 1:
+    if client.kamoshirenai is True and message.author == client.test_taker and message.content.find(BOT_PREFIX) < 1:
         # To make the content count case insensitive
         message.content = message.content.lower()
 
