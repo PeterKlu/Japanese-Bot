@@ -11,7 +11,6 @@ from discord.voice_client import VoiceClient
 from discord.ext.commands import Bot
 from random import shuffle
 
-TOKEN = 'TOKEN'
 BOT_PREFIX = '!J'
 
 client = Bot(command_prefix=BOT_PREFIX)  # discord.Client()
@@ -45,13 +44,14 @@ completed_list = []
 client.list_length = len(katakana_list) - 1  # To store the length of the kana list
 client.kanji_one_list_length = len(kanji_list_level_one) - 1  # To store the length of the first kanji list
 
+
 @client.event
 async def on_ready():
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await client.change_presence(game=discord.Game(name=BOT_PREFIX + 'commands', type=1))
+    await client.change_presence(game=discord.Game(name=BOT_PREFIX + 'commands', type=0))
 
 
 @client.event
@@ -139,9 +139,9 @@ async def on_message(message):
                 msg = '`' + client.kana_selection + '`'.format(message)
                 await client.send_message(message.channel, msg)
         if message.content.count('commands') == 1:
-            msg = ''.join('`!katakana - Initiates a quiz on Katakana\n!hiragana - Initiates a quiz on Hirgana\n'
-                          '!chart - Uploads a chart of Katakana or Hiragana\n!kanji - A random Kanji appears\n'
-                          '!op - Listen to my OP\n!reset - Resets me if a quiz is in progress`').format(message)
+            msg = ''.join('`!Jkatakana - Initiates a quiz on Katakana\n!Jhiragana - Initiates a quiz on Hirgana\n'
+                          '!Jchart - Uploads a chart of Katakana or Hiragana\n!Jkanji - A random Kanji appears\n'
+                          '!Jop - Listen to my OP\n!Jreset - Resets me if a quiz is in progress`').format(message)
             await client.send_message(message.channel, msg)
         if message.content.count('chart') == 1:
             msg = ''.join('`Hiragana or Katakana Chart?\n'
@@ -154,10 +154,12 @@ async def on_message(message):
             all_kanji_info_one_lines = kanji_info_list_level_one.readlines()
 
             compare_num = random.randint(0, client.kanji_one_list_length)
-            kanji_info_str_one = all_kanji_info_one_lines[compare_num*3]
-            kanji_info_str_two = all_kanji_info_one_lines[(compare_num*3)+1]
-            kanji_info_str_three = all_kanji_info_one_lines[(compare_num*3)+2]
-            msg = ''.join(kanji_list_level_one[compare_num] + '\n' + kanji_info_str_one + kanji_info_str_two + kanji_info_str_three).format(message)
+            kanji_info_str_one = all_kanji_info_one_lines[compare_num * 3]
+            kanji_info_str_two = all_kanji_info_one_lines[(compare_num * 3) + 1]
+            kanji_info_str_three = all_kanji_info_one_lines[(compare_num * 3) + 2]
+            msg = ''.join(kanji_list_level_one[
+                              compare_num] + '\n' + kanji_info_str_one + kanji_info_str_two + kanji_info_str_three).format(
+                message)
             await client.send_message(message.channel, msg)
 
             kanji_info_list_level_one.close()
@@ -221,9 +223,9 @@ async def on_message(message):
             await client.send_message(message.channel, msg)
 
         if client.choice == 1:
-            if len(completed_list) == client.list_length:
+            '''if len(completed_list) == client.list_length:
                 msg = '`クイズがおわりだ.`'.format(message)
-                await client.send_message(message.channel, msg)
+                await client.send_message(message.channel, msg)'''
 
             for x in range(0, client.list_length):
                 if client.kana_selection == katakana_list[x]:
@@ -248,9 +250,9 @@ async def on_message(message):
             await client.send_message(message.channel, msg)
 
         if client.choice == 2:
-            if len(completed_list) == client.list_length:
+            '''if len(completed_list) == client.list_length:
                 msg = '`The quiz is now over.`'.format(message)
-                await client.send_message(message.channel, msg)
+                await client.send_message(message.channel, msg)'''
 
             for x in range(0, client.list_length):
                 if client.kana_selection == hiragana_list[x]:
@@ -277,6 +279,12 @@ async def on_message(message):
 
         client.first_run = False
         if len(completed_list) == client.list_length:
+            if client.choice == 1:
+                msg = '`クイズがおわりだ.`'.format(message)
+                await client.send_message(message.channel, msg)
+            if client.choice == 2:
+                msg = '`The quiz is now over.`'.format(message)
+                await client.send_message(message.channel, msg)
             msg = '`Wrong Answers: ' + str(client.mistakes) + '`'.format(message)
             await client.send_message(message.channel, msg)
             client.mistakes = 0
@@ -287,5 +295,3 @@ async def on_message(message):
 
 
 keep_alive()
-token = os.environ.get("DISCORD_BOT_SECRET")
-client.run(TOKEN)
