@@ -140,7 +140,7 @@ async def on_message(message):
 
             kanji_info_list_level_one.close()
         if message.content.count('op') == 1:
-            msg = '`Here is a link to my OP:` https://www.youtube.com/watch?v=7g0OwAqv0kQ'
+            msg = '`Here is a link to my OP:` https://www.youtube.com/watch?v=GRhg6P1xq4I'
             await client.send_message(message.channel, msg)
         if message.content.count('reset') == 1:
             msg = '`Resetting`'
